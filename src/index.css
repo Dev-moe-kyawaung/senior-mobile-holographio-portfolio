@@ -1,0 +1,289 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════
+   OMNI-SPHERE HOLOGRAPHIC THEME — LAYERED LIGHT & DEPTH
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  --holo-void: #030712;
+  --holo-deep: #061026;
+  --holo-cyan: #00f0ff;
+  --holo-teal: #14b8a6;
+  --holo-blue: #3b82f6;
+  --holo-purple: #a855f7;
+  --holo-amber: #f59e0b;
+  --holo-glow: 0 0 25px rgba(0, 240, 255, 0.45);
+  --holo-border: rgba(0, 240, 255, 0.25);
+  --holo-panel-bg: rgba(6, 16, 38, 0.72);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #00f0ff #030712;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #030712; }
+::-webkit-scrollbar-thumb { 
+  background: linear-gradient(180deg, #00f0ff, #3b82f6, #a855f7); 
+  border-radius: 3px; 
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--holo-void);
+  color: #f1f5f9;
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+::selection {
+  background: #00f0ff;
+  color: #030712;
+}
+
+.font-orbitron { font-family: 'Orbitron', sans-serif; }
+.font-chakra { font-family: 'Chakra Petch', sans-serif; }
+.font-mono-code { font-family: 'Fira Code', monospace; }
+.font-rajdhani { font-family: 'Rajdhani', sans-serif; }
+.font-syne { font-family: 'Syne', sans-serif; }
+
+/* ═══════════════════════════════════════════════════════
+   VOLUMETRIC LIGHT BEAMS & ATMOSPHERIC DUST
+   ═══════════════════════════════════════════════════════ */
+
+.volumetric-cone {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw;
+  max-width: 1100px;
+  height: 80vh;
+  background: radial-gradient(
+    ellipse 55% 85% at 50% 0%,
+    rgba(0, 240, 255, 0.18) 0%,
+    rgba(59, 130, 246, 0.08) 45%,
+    rgba(168, 85, 247, 0.03) 70%,
+    transparent 100%
+  );
+  filter: blur(25px);
+  pointer-events: none;
+  z-index: 1;
+  animation: volumetricPulse 7s ease-in-out infinite;
+}
+
+@keyframes volumetricPulse {
+  0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.08); }
+}
+
+.holo-grid-lines {
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   LAYERED HOLOGRAM PANELS
+   ═══════════════════════════════════════════════════════ */
+
+.holo-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(8, 20, 48, 0.8) 0%,
+    rgba(5, 13, 33, 0.7) 50%,
+    rgba(12, 28, 64, 0.75) 100%
+  );
+  border: 1px solid var(--holo-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.7),
+    0 0 25px rgba(0, 240, 255, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    inset 0 0 20px rgba(0, 240, 255, 0.04);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.holo-panel:hover {
+  border-color: rgba(0, 240, 255, 0.65);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.8),
+    0 0 35px rgba(0, 240, 255, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+    inset 0 0 30px rgba(0, 240, 255, 0.08);
+}
+
+/* Hologram corner marks */
+.holo-corner-tl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid #00f0ff;
+  border-left: 2px solid #00f0ff;
+  pointer-events: none;
+}
+.holo-corner-tr {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid #00f0ff;
+  border-right: 2px solid #00f0ff;
+  pointer-events: none;
+}
+.holo-corner-bl {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-bottom: 2px solid #00f0ff;
+  border-left: 2px solid #00f0ff;
+  pointer-events: none;
+}
+.holo-corner-br {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-bottom: 2px solid #00f0ff;
+  border-right: 2px solid #00f0ff;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════
+   CHROMATIC ABERRATION & HOLOGRAPHIC FLICKER
+   ═══════════════════════════════════════════════════════ */
+
+.holo-chromatic {
+  text-shadow: 
+    -1.5px 0 rgba(0, 240, 255, 0.7),
+    1.5px 0 rgba(168, 85, 247, 0.7);
+}
+
+@keyframes holoFlicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.85; transform: scaleY(0.995); }
+  94% { opacity: 1; transform: scaleY(1); }
+  97% { opacity: 0.92; }
+  98% { opacity: 1; }
+}
+
+.animate-holo-flicker {
+  animation: holoFlicker 8s infinite;
+}
+
+/* Scanline ripple */
+.holo-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.8), transparent);
+  box-shadow: 0 0 15px #00f0ff;
+  animation: scanlineSweep 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scanlineSweep {
+  0% { top: -5%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 105%; opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   3D PERSPECTIVE WRAPPER & HOVER TILT
+   ═══════════════════════════════════════════════════════ */
+
+.perspective-1200 {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.holo-card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.holo-card-3d:hover {
+  transform: translateY(-8px) rotateX(4deg) rotateY(-2deg) scale(1.02);
+}
+
+/* ═══════════════════════════════════════════════════════
+   HOLOGRAPHIC BUTTONS
+   ═══════════════════════════════════════════════════════ */
+
+.holo-btn-primary {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.22) 0%, rgba(59, 130, 246, 0.3) 100%);
+  border: 1px solid #00f0ff;
+  color: #00f0ff;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35), inset 0 0 15px rgba(0, 240, 255, 0.15);
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  transition: all 0.25s ease;
+}
+
+.holo-btn-primary:hover {
+  background: linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%);
+  color: #030712;
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.85);
+  transform: translateY(-2px);
+}
+
+.holo-btn-secondary {
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.6);
+  color: #c084fc;
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.25);
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  transition: all 0.25s ease;
+}
+
+.holo-btn-secondary:hover {
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  color: #ffffff;
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.7);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════
+   HOLOGRAPHIC ENTITY / AI BEACON
+   ═══════════════════════════════════════════════════════ */
+
+@keyframes entityAura {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5), 0 0 60px rgba(168, 85, 247, 0.3);
+  }
+  50% {
+    transform: scale(1.1) rotate(180deg);
+    box-shadow: 0 0 50px rgba(0, 240, 255, 0.8), 0 0 90px rgba(168, 85, 247, 0.5);
+  }
+}
+
+.animate-entity-aura {
+  animation: entityAura 6s ease-in-out infinite;
+}
+
+@keyframes entityFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-entity-float {
+  animation: entityFloat 4s ease-in-out infinite;
+}
